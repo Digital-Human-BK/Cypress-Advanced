@@ -95,7 +95,7 @@ describe("Working with APIs", () => {
   });
 
   // Making API Requests
-  it.only("Should delete article from global feed", () => {
+  it("Should delete article from global feed", () => {
     const userCredentials = {
       user: {
         email: "artem.bondar16@gmail.com",
@@ -112,39 +112,42 @@ describe("Working with APIs", () => {
       },
     };
 
-    cy.request(
-      "POST",
-      "https://api.realworld.io/api/users/login",
-      userCredentials
-    )
-      .its("body")
-      .then((body) => {
-        const token = body.user.token;
+    //STANDARD LOGIN
+    // cy.request(
+    //   "POST",
+    //   "https://api.realworld.io/api/users/login",
+    //   userCredentials
+    // )
+    // .its("body")
+    // .then((body) => {
+    //   const token = body.user.token;
 
-        cy.request({
-          url: "https://api.realworld.io/api/articles/",
-          headers: { Authorization: `Token ${token}` },
-          method: "POST",
-          body: requestBody,
-        }).then((res) => {
-          expect(res.status).to.equal(200);
-        });
-
-        cy.contains("Global Feed").click();
-        cy.contains(requestBody.article.title).click();
-        cy.get(".article-actions").contains("Delete Article").click();
-
-        cy.request({
-          url: "https://api.realworld.io/api/articles?limit=10&offset=0",
-          headers: { Authorization: `Token ${token}` },
-          method: "GET",
-        })
-          .its("body")
-          .then((body) => {
-            expect(body.articles[0].title).not.to.equal(
-              requestBody.article.title
-            );
-          });
+    //HEADLESS LOGIN WE HATE THE TOKEN ALREADY
+    cy.get("@token").then((token) => {
+      cy.request({
+        url: "https://api.realworld.io/api/articles/",
+        headers: { Authorization: `Token ${token}` },
+        method: "POST",
+        body: requestBody,
+      }).then((res) => {
+        expect(res.status).to.equal(200);
       });
+
+      cy.contains("Global Feed").click();
+      cy.contains(requestBody.article.title).click();
+      cy.get(".article-actions").contains("Delete Article").click();
+
+      cy.request({
+        url: "https://api.realworld.io/api/articles?limit=10&offset=0",
+        headers: { Authorization: `Token ${token}` },
+        method: "GET",
+      })
+        .its("body")
+        .then((body) => {
+          expect(body.articles[0].title).not.to.equal(
+            requestBody.article.title
+          );
+        });
+    });
   });
 });
