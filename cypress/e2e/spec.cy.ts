@@ -29,7 +29,7 @@ describe("Working with APIs", () => {
     });
   });
 
-  it.only("Intercepting and modifying the request and response", () => {
+  it("Intercepting and modifying the request and response", () => {
     cy.intercept("POST", "https://api.realworld.io/api/articles/", (req) => {
       req.reply((res) => {
         expect(res.body.article.description).to.equal("Test Description");
@@ -92,5 +92,59 @@ describe("Working with APIs", () => {
 
     cy.get("app-favorite-button").eq(1).click().should("contain", "6");
     cy.get("app-favorite-button").eq(1).should("contain", "6");
+  });
+
+  // Making API Requests
+  it.only("Should delete article from global feed", () => {
+    const userCredentials = {
+      user: {
+        email: "artem.bondar16@gmail.com",
+        password: "CypressTest1",
+      },
+    };
+
+    const requestBody = {
+      article: {
+        tagList: [],
+        title: "Request from API 321",
+        description: "TEST Description",
+        body: "TEST Body",
+      },
+    };
+
+    cy.request(
+      "POST",
+      "https://api.realworld.io/api/users/login",
+      userCredentials
+    )
+      .its("body")
+      .then((body) => {
+        const token = body.user.token;
+
+        cy.request({
+          url: "https://api.realworld.io/api/articles/",
+          headers: { Authorization: `Token ${token}` },
+          method: "POST",
+          body: requestBody,
+        }).then((res) => {
+          expect(res.status).to.equal(200);
+        });
+
+        cy.contains("Global Feed").click();
+        cy.contains(requestBody.article.title).click();
+        cy.get(".article-actions").contains("Delete Article").click();
+
+        cy.request({
+          url: "https://api.realworld.io/api/articles?limit=10&offset=0",
+          headers: { Authorization: `Token ${token}` },
+          method: "GET",
+        })
+          .its("body")
+          .then((body) => {
+            expect(body.articles[0].title).not.to.equal(
+              requestBody.article.title
+            );
+          });
+      });
   });
 });
