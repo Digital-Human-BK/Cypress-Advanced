@@ -1,0 +1,39 @@
+{
+  "articles": [
+    {
+      "slug": "Title-1-1850",
+      "title": "Title 1",
+      "description": "My description",
+      "body": "My body",
+      "tagList": [],
+      "createdAt": "2023-05-28T14:13:35.448Z",
+      "updatedAt": "2023-05-28T14:13:35.448Z",
+      "favorited": false,
+      "favoritesCount": 1,
+      "author": {
+        "username": "CyTestUser",
+        "bio": "2222",
+        "image": "https://i.stack.imgur.com/34AD2.jpg",
+        "following": false
+      }
+    },
+    {
+      "slug": "Title-2-2334-1850",
+      "title": "Title 2",
+      "description": "This is description",
+      "body": "This is body",
+      "tagList": [],
+      "createdAt": "2023-05-26T13:30:56.781Z",
+      "updatedAt": "2023-05-26T13:30:56.781Z",
+      "favorited": false,
+      "favoritesCount": 5,
+      "author": {
+        "username": "CyTestUser",
+        "bio": "2222",
+        "image": "https://i.stack.imgur.com/34AD2.jpg",
+        "following": false
+      }
+    }
+  ],
+  "articlesCount": 2
+}
