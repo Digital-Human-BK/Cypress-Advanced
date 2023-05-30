@@ -30,18 +30,19 @@ describe("Working with APIs", () => {
   });
 
   it("Intercepting and modifying the request and response", () => {
-    cy.intercept("POST", "https://api.realworld.io/api/articles/", (req) => {
-      req.reply((res) => {
-        expect(res.body.article.description).to.equal("Test Description");
-        res.body.article.description = "Test Description Modified";
-      });
-    }).as("postArticles");
     // cy.intercept("POST", "https://api.realworld.io/api/articles/", (req) => {
-    //   req.body.article.description = "Test Description Modified";
+    //   req.reply((res) => {
+    //     expect(res.body.article.description).to.equal("Test Description");
+    //     res.body.article.description = "Test Description Modified";
+    //   });
     // }).as("postArticles");
 
+    cy.intercept("POST", "https://api.realworld.io/api/articles/", (req) => {
+      req.body.article.description = "Test Description Modified";
+    }).as("postArticles");
+
     cy.contains("New Article").click();
-    cy.get('[formcontrolname="title"]').type("Test title BK");
+    cy.get('[formcontrolname="title"]').type("Test title BK2");
     cy.get('[formcontrolname="description"]').type("Test Description");
     cy.get('[formcontrolname="body"]').type("Test body");
     cy.contains("Publish Article").click();
