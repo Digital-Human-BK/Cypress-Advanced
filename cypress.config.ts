@@ -4,6 +4,10 @@ export default defineConfig({
   viewportHeight: 1080,
   viewportWidth: 1920,
   video: false,
+  retries: {
+    runMode: 2,
+    openMode: 0,
+  },
   env: {
     email: "artem.bondar16@gmail.com",
     password: "CypressTest1",
