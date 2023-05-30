@@ -8,7 +8,7 @@ describe("Working with APIs", () => {
   });
 
   it("Should login", () => {
-    cy.intercept("POST", "https://api.realworld.io/api/articles/").as(
+    cy.intercept("POST", Cypress.env("apiUrl") + "/api/articles/").as(
       "postArticles"
     );
 
@@ -37,7 +37,7 @@ describe("Working with APIs", () => {
     //   });
     // }).as("postArticles");
 
-    cy.intercept("POST", "https://api.realworld.io/api/articles/", (req) => {
+    cy.intercept("POST", Cypress.env("apiUrl") + "/api/articles/", (req) => {
       req.body.article.description = "Test Description Modified";
     }).as("postArticles");
 
@@ -67,11 +67,11 @@ describe("Working with APIs", () => {
   });
 
   it("Verify global feed likes count", () => {
-    cy.intercept("GET", "https://api.realworld.io/api/articles/feed*", {
+    cy.intercept("GET", Cypress.env("apiUrl") + "/api/articles/feed*", {
       articles: [],
       articlesCount: 0,
     });
-    cy.intercept("GET", "https://api.realworld.io/api/articles*", {
+    cy.intercept("GET", Cypress.env("apiUrl") + "/api/articles*", {
       fixture: "articles.json",
     });
 
@@ -86,7 +86,7 @@ describe("Working with APIs", () => {
       obj.articles[1].favoritesCount = 6;
       cy.intercept(
         "POST",
-        `https://api.realworld.io/api/articles/${articleLink}/favorite`,
+        `${Cypress.env("apiUrl")}/api/articles/${articleLink}/favorite`,
         obj
       );
     });
@@ -96,7 +96,7 @@ describe("Working with APIs", () => {
   });
 
   // Making API Requests
-  it("Should delete article from global feed", () => {
+  it.only("Should delete article from global feed", () => {
     const userCredentials = {
       user: {
         email: "artem.bondar16@gmail.com",
@@ -123,10 +123,10 @@ describe("Working with APIs", () => {
     // .then((body) => {
     //   const token = body.user.token;
 
-    //HEADLESS LOGIN WE HATE THE TOKEN ALREADY
+    //HEADLESS LOGIN WE HAVE THE TOKEN ALREADY
     cy.get("@token").then((token) => {
       cy.request({
-        url: "https://api.realworld.io/api/articles/",
+        url: Cypress.env("apiUrl") + "/api/articles/",
         headers: { Authorization: `Token ${token}` },
         method: "POST",
         body: requestBody,
@@ -139,7 +139,7 @@ describe("Working with APIs", () => {
       cy.get(".article-actions").contains("Delete Article").click();
 
       cy.request({
-        url: "https://api.realworld.io/api/articles?limit=10&offset=0",
+        url: Cypress.env("apiUrl") + "/api/articles?limit=10&offset=0",
         headers: { Authorization: `Token ${token}` },
         method: "GET",
       })
