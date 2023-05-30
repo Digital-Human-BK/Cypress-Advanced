@@ -1,0 +1,106 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2023-05-30T12:41:59.440Z",
+    "end": "2023-05-30T12:42:01.952Z",
+    "duration": 2512,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "1ff22234-642b-4770-bd31-93e38a77b83f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\spec.cy.ts",
+      "file": "cypress\\e2e\\spec.cy.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "791b85f7-044a-43e6-96c6-3e43c7eea08f",
+          "title": "Working with APIs",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify global feed likes count",
+              "fullTitle": "Working with APIs Verify global feed likes count",
+              "timedOut": null,
+              "duration": 2468,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept(\"GET\", Cypress.env(\"apiUrl\") + \"/api/articles/feed*\", {\n    articles: [],\n    articlesCount: 0,\n});\ncy.intercept(\"GET\", Cypress.env(\"apiUrl\") + \"/api/articles*\", {\n    fixture: \"articles.json\",\n});\ncy.contains(\"Global Feed\").click();\ncy.get(\"app-favorite-button\").then((heartList) => {\n    expect(heartList[0]).to.contain(1);\n    expect(heartList[1]).to.contain(5);\n});\ncy.fixture(\"articles.json\").then((obj) => {\n    const articleLink = obj.articles[1].slug;\n    obj.articles[1].favoritesCount = 6;\n    cy.intercept(\"POST\", `${Cypress.env(\"apiUrl\")}/api/articles/${articleLink}/favorite`, obj);\n});\ncy.get(\"app-favorite-button\").eq(1).click().should(\"contain\", \"6\");\ncy.get(\"app-favorite-button\").eq(1).should(\"contain\", \"6\");",
+              "err": {},
+              "uuid": "ab4d82d0-2398-47f5-bc15-e99e5493c575",
+              "parentUUID": "791b85f7-044a-43e6-96c6-3e43c7eea08f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ab4d82d0-2398-47f5-bc15-e99e5493c575"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2468,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/results/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

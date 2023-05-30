@@ -66,7 +66,7 @@ describe("Working with APIs", () => {
       .and("contain", "testing");
   });
 
-  it("Verify global feed likes count", () => {
+  it.only("Verify global feed likes count", () => {
     cy.intercept("GET", Cypress.env("apiUrl") + "/api/articles/feed*", {
       articles: [],
       articlesCount: 0,
@@ -96,13 +96,13 @@ describe("Working with APIs", () => {
   });
 
   // Making API Requests
-  it.only("Should delete article from global feed", () => {
-    const userCredentials = {
-      user: {
-        email: "artem.bondar16@gmail.com",
-        password: "CypressTest1",
-      },
-    };
+  it("Should delete article from global feed", () => {
+    // const userCredentials = {
+    //   user: {
+    //     email: "artem.bondar16@gmail.com",
+    //     password: "CypressTest1",
+    //   },
+    // };
 
     const requestBody = {
       article: {

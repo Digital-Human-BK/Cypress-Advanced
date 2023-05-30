@@ -5,8 +5,12 @@ export default defineConfig({
   viewportWidth: 1920,
   video: false,
   retries: {
-    runMode: 2,
+    runMode: 0,
     openMode: 0,
+  },
+  reporter: "cypress-multi-reporters",
+  reporterOptions: {
+    configFile: "reporter-config.json",
   },
   env: {
     email: "artem.bondar16@gmail.com",

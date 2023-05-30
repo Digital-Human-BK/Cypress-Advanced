@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<testsuites>
+<testsuite name="Root Suite" timestamp="2023-05-30T12:41:38" tests="0" file="cypress\e2e\advancedFeatures.cy.ts" time="0.000" failures="0"></testsuite>
+<testsuite name="Test logout" timestamp="2023-05-30T12:41:38" tests="1" time="20.163" failures="1">
+  
+  <testcase name="Test logout Verify user can logout successfully" time="5.812" classname="Verify user can logout successfully">
+    
+    <failure message="Timed out retrying after 4000ms: expected &apos;&lt;ul.nav.navbar-nav.pull-xs-right&gt;&apos; to contain &apos;Sign up1&apos;" type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: expected '<ul.nav.navbar-nav.pull-xs-right>' to contain 'Sign up1'
+    at Context.eval (webpack:///./cypress/e2e/advancedFeatures.cy.ts:9:26)]]></failure>
+    
+  </testcase>
+  
+</testsuite>
+
+<testsuite name="Root Suite" timestamp="2023-05-30T12:41:59" tests="0" file="cypress\e2e\spec.cy.ts" time="0.000" failures="0"></testsuite>
+<testsuite name="Working with APIs" timestamp="2023-05-30T12:41:59" tests="1" time="2.495" failures="0">
+  
+  <testcase name="Working with APIs Verify global feed likes count" time="2.468" classname="Verify global feed likes count"></testcase>
+  
+</testsuite>
+
+</testsuites>
