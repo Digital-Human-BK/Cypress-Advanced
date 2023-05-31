@@ -3,6 +3,7 @@
 <div align="center">
     <img src="https://res.cloudinary.com/dio4dx3uy/image/upload/v1685523484/UC-dd071208-1ddd-4dc4-90f6-0cc753ff824f_xupvbi.jpg" alt="Logo" width="80%">
 </div>
+<br/>
 
 # ![Angular Example App](logo.png)
 
