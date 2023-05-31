@@ -1,4 +1,4 @@
-### E2E Web UI Automation from scratch. Up to date with Cypress v12 (01/2023)
+## E2E Web UI Automation from scratch. Up to date with Cypress v12 (01/2023)
 
 <div align="center">
     <img src="https://res.cloudinary.com/dio4dx3uy/image/upload/v1685523484/UC-dd071208-1ddd-4dc4-90f6-0cc753ff824f_xupvbi.jpg" alt="Logo" width="80%">
@@ -11,12 +11,6 @@
 ### [Demo](https://angular.realworld.io)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
 This codebase was created to demonstrate a fully fledged application built with Angular that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more. We've gone to great lengths to adhere to the [Angular Styleguide](https://angular.io/styleguide) & best practices.
-
-Additionally, there is an Angular 1.5 version of this codebase that you can [fork](https://github.com/gothinkster/angularjs-realworld-example-app) and/or [learn how to recreate](https://thinkster.io/angularjs-es6-tutorial).
-
-# How it works
-
-We're currently working on some docs for the codebase (explaining where functionality is located, how it works, etc) but the codebase should be straightforward to follow as is. We've also released a [step-by-step tutorial w/ screencasts](https://thinkster.io/tutorials/building-real-world-angular-2-apps) that teaches you how to recreate the codebase from scratch.
 
 ### Making requests to the backend API
 
@@ -31,6 +25,10 @@ If you want to change the API URL to a local server, simply edit `src/environmen
 Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. We use [NPM](https://www.npmjs.com) to manage the dependencies. Run `npm install --force` to resolve all dependencies (might take a minute). Use `--force flag`
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+### Testing the project
+
+Run `npx cypress open` and choose a test to run.
 
 ### Building the project
 
